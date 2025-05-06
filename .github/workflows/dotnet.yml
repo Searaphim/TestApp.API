@@ -13,12 +13,14 @@ jobs:
   build:
 
     runs-on: [self-hosted, Linux, X64]
+    env:
+      SOLUTION_FILE: TestApp.API.sln
 
     steps:
     - uses: actions/checkout@v4
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore $SOLUTION_FILE
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build $SOLUTION_FILE --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test $SOLUTION_FILE --no-build --verbosity normal
