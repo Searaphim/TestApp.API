@@ -1,0 +1,26 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: .NET
+
+on:
+  push:
+    branches: [ "dev" ]
+  pull_request:
+    branches: [ "dev" ]
+
+jobs:
+  build:
+
+    runs-on: [self-hosted, Linux, X64]
+    env:
+      SOLUTION_FILE: TestApp.API.sln
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Restore dependencies
+      run: dotnet restore $SOLUTION_FILE
+    - name: Build
+      run: dotnet build $SOLUTION_FILE --no-restore
+    - name: Test
+      run: dotnet test $SOLUTION_FILE --no-build --verbosity normal
