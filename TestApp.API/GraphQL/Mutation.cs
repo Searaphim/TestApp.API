@@ -17,7 +17,7 @@ namespace TestApp.API.GraphQL
             };
 
             dbContext.Users.Add(user);
-            //await dbContext.SaveChangesAsync();
+            await dbContext.SaveChangesAsync();
 
             return user;
         }
